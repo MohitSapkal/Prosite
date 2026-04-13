@@ -29,6 +29,7 @@
             <li><a href="#" class='active'>About</a></li>
             <li><a href="#" class='active'>Contact</a></li>
         </ul>
+        <button class="admin-toggle-btn" title="Toggle Admin Panel"><i class="fas fa-cog"></i></button>
         <button class="menu-btn"><i class="fas fa-bars"></i></button>
     </nav>
 
@@ -79,6 +80,50 @@
 
     <script src="projectsData.js"></script>
     <script src="script.js"></script>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="admin-panel">
+        <div class="admin-panel-content">
+            <div class="admin-header">
+                <h2>Project Manager</h2>
+                <button class="admin-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="admin-form-section">
+                <h3>Add New Project</h3>
+                <form id="add-project-form">
+                    <div class="form-group">
+                        <label for="project-title">Project Title *</label>
+                        <input type="text" id="project-title" required placeholder="E.g., My Awesome Project">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description">Description *</label>
+                        <textarea id="project-description" required placeholder="Describe your project..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-category">Category *</label>
+                        <select id="project-category" required>
+                            <option value="">Select a category</option>
+                            <option value="web">Web Development</option>
+                            <option value="app">Mobile Apps</option>
+                            <option value="design">UI/UX Design</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="primary-btn">Add Project</button>
+                </form>
+            </div>
+
+            <div class="admin-projects-section">
+                <h3>Custom Projects</h3>
+                <div id="custom-projects-list" class="custom-projects-list">
+                    <!-- Custom projects added by user will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Overlay -->
+    <div id="admin-overlay" class="admin-overlay"></div>
 </body>
 
 </html>

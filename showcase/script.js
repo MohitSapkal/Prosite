@@ -1,18 +1,55 @@
 /* Project Data loaded from projectsData.js */
 
+let customProjects = [];
+
+// Load custom projects from localStorage on page load
+const loadCustomProjects = () => {
+    const stored = localStorage.getItem('customProjects');
+    if (stored) {
+        customProjects = JSON.parse(stored);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    loadCustomProjects();
 
     const grid = document.getElementById('projects-grid');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const adminToggleBtn = document.querySelector('.admin-toggle-btn');
+    const adminPanel = document.getElementById('admin-panel');
+    const adminOverlay = document.getElementById('admin-overlay');
+    const adminCloseBtn = document.querySelector('.admin-close-btn');
+    const addProjectForm = document.getElementById('add-project-form');
+    const customProjectsList = document.getElementById('custom-projects-list');
 
-    // Render Projects
+    // Admin Panel Toggle
+    adminToggleBtn.addEventListener('click', () => {
+        adminPanel.classList.add('active');
+        adminOverlay.classList.add('active');
+    });
+
+    adminCloseBtn.addEventListener('click', () => {
+        adminPanel.classList.remove('active');
+        adminOverlay.classList.remove('active');
+    });
+
+    adminOverlay.addEventListener('click', () => {
+        adminPanel.classList.remove('active');
+        adminOverlay.classList.remove('active');
+    });
+
+    // Render Projects - Now includes custom projects
     const renderProjects = (filterType) => {
         // Clear grid
         grid.innerHTML = '';
 
+        // Combine original and custom projects
+        const allProjects = [...projectsData, ...customProjects];
+
         const filtered = filterType === 'all'
-            ? projectsData
-            : projectsData.filter(p => p.category === filterType);
+            ? allProjects
+            : allProjects.filter(p => p.category === filterType);
 
         filtered.forEach((project, index) => {
             const card = document.createElement('div');
@@ -48,8 +85,80 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Display custom projects in admin panel
+    const displayCustomProjects = () => {
+        if (customProjects.length === 0) {
+            customProjectsList.innerHTML = '<div class="empty-message">No custom projects yet. Add one using the form above.</div>';
+            return;
+        }
+
+        customProjectsList.innerHTML = customProjects.map((project, index) => `
+            <div class="custom-project-item">
+                <div class="project-item-header">
+                    <span class="project-item-title">${project.title}</span>
+                    <span class="project-item-category">${project.categoryName}</span>
+                </div>
+                <p class="project-item-desc">${project.description}</p>
+                <div class="project-item-actions">
+                    <button class="delete-project-btn" data-index="${index}">Delete</button>
+                </div>
+            </div>
+        `).join('');
+
+        // Add delete functionality
+        document.querySelectorAll('.delete-project-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                customProjects.splice(index, 1);
+                localStorage.setItem('customProjects', JSON.stringify(customProjects));
+                displayCustomProjects();
+                renderProjects('all');
+            });
+        });
+    };
+
+    // Add Project Form Handler
+    addProjectForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById('project-title').value;
+        const description = document.getElementById('project-description').value;
+        const categoryValue = document.getElementById('project-category').value;
+        
+        const categoryMap = {
+            'web': 'Web Development',
+            'app': 'Mobile Apps',
+            'design': 'UI/UX Design'
+        };
+
+        const newProject = {
+            title: title,
+            image: `https://picsum.photos/seed/${title.replace(/\s+/g, '-').toLowerCase()}/600/400`,
+            liveUrl: '#',
+            githubUrl: '#',
+            category: categoryValue,
+            categoryName: categoryMap[categoryValue],
+            description: description,
+            tech: ['HTML', 'CSS', 'JavaScript']
+        };
+
+        customProjects.push(newProject);
+        localStorage.setItem('customProjects', JSON.stringify(customProjects));
+
+        // Reset form
+        addProjectForm.reset();
+
+        // Update displays
+        displayCustomProjects();
+        renderProjects('all');
+
+        // Show success message
+        alert('Project added successfully!');
+    });
+
     // Initial render
     renderProjects('all');
+    displayCustomProjects();
 
     // Filter Logic
     filterBtns.forEach(btn => {

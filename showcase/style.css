@@ -485,6 +485,250 @@ footer {
     height: 45px;
     border-radius: 50%;
     background: var(--surface-glass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-glass);
+}
+
+.social-links a:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-3px);
+    border-color: var(--accent-primary);
+}
+
+/* Admin Panel Styles */
+.admin-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.admin-toggle-btn:hover {
+    color: var(--accent-primary);
+    transform: rotate(90deg);
+}
+
+.admin-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.admin-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.admin-panel {
+    position: fixed;
+    right: -500px;
+    top: 0;
+    width: 500px;
+    height: 100vh;
+    background: var(--bg-dark);
+    border-left: 2px solid var(--border-glass);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.admin-panel.active {
+    right: 0;
+}
+
+.admin-panel-content {
+    padding: 2rem;
+    color: var(--text-primary);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-glass);
+    padding-bottom: 1rem;
+}
+
+.admin-header h2 {
+    font-size: 1.5rem;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.admin-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-close-btn:hover {
+    color: var(--accent-primary);
+    transform: scale(1.2);
+}
+
+.admin-form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border-glass);
+}
+
+.admin-form-section h3,
+.admin-projects-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-primary);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--surface-glass);
+    border: 2px solid var(--border-glass);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-family: var(--font-main);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#add-project-form .primary-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    font-size: 1rem;
+}
+
+.custom-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.custom-project-item {
+    padding: 1rem;
+    background: var(--surface-glass);
+    border: 2px solid var(--border-glass);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.custom-project-item:hover {
+    border-color: var(--accent-primary);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.project-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+
+.project-item-title {
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.project-item-category {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-primary);
+    color: white;
+    border-radius: 20px;
+}
+
+.project-item-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.project-item-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.delete-project-btn {
+    padding: 0.4rem 0.8rem;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.delete-project-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+.empty-message {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .admin-panel {
+        width: 100%;
+        right: -100%;
+    }
+
+    .admin-toggle-btn {
+        margin-right: 0.5rem;
+    }
+}
     border: 1px solid var(--border-glass);
     color: var(--text-secondary);
     display: flex;
