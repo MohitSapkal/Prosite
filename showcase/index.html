@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase</title>
+    <meta name="description"
+        content="A curated selection of my finest work in web development, design, and software engineering.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="glow blob-1"></div>
+        <div class="glow blob-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">Prosite<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#" class='active'>Home</a></li>
+            <li><a href="#" class="active">Projects</a></li>
+            <li><a href="#" class='active'>About</a></li>
+            <li><a href="#" class='active'>Contact</a></li>
+        </ul>
+        <button class="menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="animate-up">Featured <span class="gradient-text">Projects</span></h1>
+            <p class="subtitle animate-up delay-1">Explore my latest work spanning across web development, mobile
+                applications, and UI/UX design.</p>
+        </div>
+        <div class="scroll-indicator animate-up delay-2">
+            <span class="scroll-text">Explore</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="showcase-section">
+        <div class="container">
+            <div class="filter-container animate-on-scroll">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="app">Mobile Apps</button>
+                <button class="filter-btn" data-filter="design">UI/UX Design</button>
+            </div>
+
+            <div class="projects-grid" id="projects-grid">
+                <!-- Project cards injected by JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h2>Let's build something extraordinary together.</h2>
+            <a href="#" class="primary-btn">Get In Touch <i class="fas fa-arrow-right"></i></a>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Crafted with precision. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="projectsData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
